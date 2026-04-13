@@ -6,7 +6,7 @@
 [![Standard](https://img.shields.io/badge/Standard-Equine%20Data-green.svg)](equine-profile-standard/)
 
 Published by **Open Equine** — openequine.org  
-Founded and maintained by **Horse AI — TechXZone Pvt Ltd**  
+Founded and maintained by **Open Equine — TechXZone Pvt Ltd**  
 Contact: contact@openequine.org
 
 ---
