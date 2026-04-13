@@ -63,6 +63,6 @@ Issues and pull requests are welcome. Please open an issue before proposing brea
 
 ## Licence
 
-MIT License — Copyright (c) 2026 Horse AI — TechXZone Pvt Ltd
+MIT License — Copyright (c) 2026 Open Equine — TechXZone Pvt Ltd
 
 See [LICENSE.txt](LICENSE.txt) for full terms.
