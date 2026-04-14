@@ -1,0 +1,156 @@
+{
+  "_comment": "Equine Profile Standard — AWS DynamoDB Schema v1.0. Published by Open Equine — TechXZone Pvt Ltd. MIT Licensed | openequine.org | contact@openequine.org",
+
+  "tables": [
+
+    {
+      "_comment": "TABLE 1: stables — Standalone stable registry",
+      "TableName": "equine_stables",
+      "BillingMode": "PAY_PER_REQUEST",
+      "KeySchema": [
+        { "AttributeName": "stable_id", "KeyType": "HASH" }
+      ],
+      "AttributeDefinitions": [
+        { "AttributeName": "stable_id", "AttributeType": "S" },
+        { "AttributeName": "country",   "AttributeType": "S" },
+        { "AttributeName": "city",      "AttributeType": "S" }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "gsi_country_city",
+          "KeySchema": [
+            { "AttributeName": "country", "KeyType": "HASH" },
+            { "AttributeName": "city",    "KeyType": "RANGE" }
+          ],
+          "Projection": { "ProjectionType": "ALL" }
+        }
+      ],
+      "document_structure": {
+        "stable_id":       "String — partition key. UUID.",
+        "stable_name":     "String — required.",
+        "stable_location": "String — full free text address.",
+        "address_line1":   "String",
+        "address_line2":   "String",
+        "city":            "String",
+        "state":           "String",
+        "country":         "String",
+        "pincode":         "String — string to handle leading zeros and international formats.",
+        "created_at":      "String — ISO 8601 datetime.",
+        "updated_at":      "String — ISO 8601 datetime."
+      }
+    },
+
+    {
+      "_comment": "TABLE 2: horses — Core horse identity table",
+      "TableName": "equine_horses",
+      "BillingMode": "PAY_PER_REQUEST",
+      "KeySchema": [
+        { "AttributeName": "horse_id", "KeyType": "HASH" }
+      ],
+      "AttributeDefinitions": [
+        { "AttributeName": "horse_id",   "AttributeType": "S" },
+        { "AttributeName": "breed",      "AttributeType": "S" },
+        { "AttributeName": "gender",     "AttributeType": "S" },
+        { "AttributeName": "ueln",       "AttributeType": "S" },
+        { "AttributeName": "microchip",  "AttributeType": "S" }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "gsi_breed_gender",
+          "KeySchema": [
+            { "AttributeName": "breed",  "KeyType": "HASH" },
+            { "AttributeName": "gender", "KeyType": "RANGE" }
+          ],
+          "Projection": { "ProjectionType": "ALL" }
+        },
+        {
+          "IndexName": "gsi_ueln",
+          "KeySchema": [
+            { "AttributeName": "ueln", "KeyType": "HASH" }
+          ],
+          "Projection": { "ProjectionType": "ALL" }
+        },
+        {
+          "IndexName": "gsi_microchip",
+          "KeySchema": [
+            { "AttributeName": "microchip", "KeyType": "HASH" }
+          ],
+          "Projection": { "ProjectionType": "ALL" }
+        }
+      ],
+      "document_structure": {
+        "horse_id":    "String — partition key. UUID.",
+        "horse_name":  "String — required.",
+        "dob":         "String — ISO 8601 date: YYYY-MM-DD.",
+        "breed":       "String",
+        "gender":      "String — mare | stallion | gelding.",
+        "color":       "String",
+        "ueln":        "String — 15 char alphanumeric. Universal Equine Life Number.",
+        "passport_no": "String — travel passport number issued by a national authority.",
+        "microchip":   "String — 15-digit ISO 11784/11785 microchip number.",
+        "created_at":  "String — ISO 8601 datetime.",
+        "updated_at":  "String — ISO 8601 datetime."
+      }
+    },
+
+    {
+      "_comment": "TABLE 3: pedigree — Lineage data. Each ancestor has a name field and an optional horse_id reference.",
+      "TableName": "equine_pedigree",
+      "BillingMode": "PAY_PER_REQUEST",
+      "KeySchema": [
+        { "AttributeName": "horse_id",    "KeyType": "HASH" },
+        { "AttributeName": "pedigree_id", "KeyType": "RANGE" }
+      ],
+      "AttributeDefinitions": [
+        { "AttributeName": "horse_id",    "AttributeType": "S" },
+        { "AttributeName": "pedigree_id", "AttributeType": "S" }
+      ],
+      "document_structure": {
+        "horse_id":               "String — partition key. Reference to equine_horses.",
+        "pedigree_id":            "String — sort key. UUID.",
+        "sire_name":              "String",
+        "sire_horse_id":          "String — reference to equine_horses.horse_id if sire is registered.",
+        "dam_name":               "String",
+        "dam_horse_id":           "String — reference to equine_horses.horse_id if dam is registered.",
+        "sire_of_sire_name":      "String",
+        "sire_of_sire_horse_id":  "String",
+        "dam_of_sire_name":       "String",
+        "dam_of_sire_horse_id":   "String",
+        "sire_of_dam_name":       "String",
+        "sire_of_dam_horse_id":   "String",
+        "dam_of_dam_name":        "String",
+        "dam_of_dam_horse_id":    "String",
+        "description":            "String — free text for extended lineage notes.",
+        "created_at":             "String — ISO 8601 datetime.",
+        "updated_at":             "String — ISO 8601 datetime."
+      }
+    },
+
+    {
+      "_comment": "TABLE 4: owners — Owner and breeder information linked to the horse.",
+      "TableName": "equine_owners",
+      "BillingMode": "PAY_PER_REQUEST",
+      "KeySchema": [
+        { "AttributeName": "horse_id",  "KeyType": "HASH" },
+        { "AttributeName": "owner_id",  "KeyType": "RANGE" }
+      ],
+      "AttributeDefinitions": [
+        { "AttributeName": "horse_id",  "AttributeType": "S" },
+        { "AttributeName": "owner_id",  "AttributeType": "S" }
+      ],
+      "document_structure": {
+        "horse_id":          "String — partition key. Reference to equine_horses.",
+        "owner_id":          "String — sort key. UUID.",
+        "owner_name":        "String — required.",
+        "owner_contact":     "String — required. Phone number or email address.",
+        "owner_stable_id":   "String — reference to equine_stables.stable_id.",
+        "breeder_name":      "String",
+        "breeder_contact":   "String — phone number or email address.",
+        "breeder_stable_id": "String — reference to equine_stables.stable_id.",
+        "created_at":        "String — ISO 8601 datetime.",
+        "updated_at":        "String — ISO 8601 datetime."
+      }
+    }
+
+  ]
+}
