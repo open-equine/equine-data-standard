@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/open-equine/equine-data-standard/main/equine-profile-standard/v1.0/schema/equine.profile.standard.v1.0.json",
+  "_comment": "This is a sample valid horse profile conforming to the Equine Profile Standard v1.0. All values are fictional and for illustration purposes only.",
+
+  "horseName": "Rajputana Bahadur",
+  "dob": "2019-03-15",
+  "breed": "Marwari",
+  "gender": "stallion",
+  "color": "Bay",
+  "ueln": "IN2019MARW00001",
+  "passportNo": "AIMHS-2019-00432",
+  "microchip": "985141002345678",
+
+  "pedigree": {
+    "sire": "Desert Storm",
+    "dam": "Rajmahal Rani",
+    "sireOfSire": "Thar Thunder",
+    "damOfSire": "Marwar Princess",
+    "sireOfDam": "Golden Dunes",
+    "damOfDam": "Jaipur Rose",
+    "description": "Rajputana Bahadur descends from a distinguished Marwari bloodline with roots in the Jodhpur royal stables. His sire Desert Storm was a national champion at the All India Marwari Horse Show in 2015. Known for the characteristic inward-curving ears and high-stepping gait of the breed."
+  },
+
+  "owner": {
+    "ownerName": "Vikram Singh Rathore",
+    "ownerContact": "+91-9876543210",
+    "stableLocation": "Rathore Stud Farm, Jodhpur, Rajasthan, India",
+    "breederName": "Jodhpur Heritage Stables",
+    "breederContact": "heritage@samplestables.in"
+  },
+
+  "media": {
+    "photos": [
+      {
+        "url": "https://horseai.org/../profiles/rajputana-bahadur/primary.jpg",
+        "caption": "Left lateral profile view",
+        "isPrimary": true
+      },
+      {
+        "url": "https://horseai.org/../profiles/rajputana-bahadur/competition.jpg",
+        "caption": "Rajasthan Horse Show 2023 — First Place",
+        "isPrimary": false
+      },
+      {
+        "url": "https://horseai.org/../profiles/rajputana-bahadur/stable.jpg",
+        "caption": "At Rathore Stud Farm, April 2024",
+        "isPrimary": false
+      }
+    ]
+  },
+
+  "meta": {
+    "schemaVersion": "1.0",
+    "createdAt": "2026-04-07T10:30:00Z",
+    "updatedAt": "2026-04-07T10:30:00Z",
+    "capturedBy": "Vikram Singh Rathore",
+    "sourceApp": "Open Equine — TechXZone Pvt Ltd",
+    "geo": {
+      "lat": 26.2389,
+      "lng": 73.0243,
+      "accuracyMeters": 45
+    }
+  },
+
+  "consent": {
+    "acknowledged": true,
+    "acknowledgedAt": "2026-04-07T10:29:55Z",
+    "acknowledgedBy": "Vikram Singh Rathore",
+    "disclaimer": "This profile has been created using Open Equine compliant software. Viewers are expected to verify the details independently. Open Equine and TechXZone Pvt Ltd are not responsible for any incorrect or false information submitted by users.",
+    "ipAddress": "103.21.58.200"
+  }
+}
