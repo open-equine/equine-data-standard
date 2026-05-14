@@ -32,6 +32,7 @@ equine-profile-standard/
     ├── examples/
     ├── docs/
     └── database/
+    └── spreadsheet/
 ```
 
 Each version is self-contained and permanently frozen on release.
