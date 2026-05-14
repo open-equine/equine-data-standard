@@ -32,11 +32,12 @@ equine-data-standard/
 │
 └── equine-profile-standard/
     ├── README.md
-    └── vX.Y/
+    └── v1.0/
         ├── schema/
         ├── examples/
         ├── docs/
-        └── database/
+        ├── database/
+        └── spreadsheet/
 ```
 
 ---
